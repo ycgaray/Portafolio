@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portafolio Python Junior</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #050816;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: rgba(0, 255, 255, 0.12);
+      filter: blur(120px);
+      top: -120px;
+      right: -100px;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 400px;
+      height: 400px;
+      background: rgba(98, 0, 255, 0.12);
+      filter: blur(120px);
+      bottom: -100px;
+      left: -100px;
+      z-index: -1;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 60px;
+      padding: 50px 0;
+      flex-wrap: wrap;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: #5eead4;
+      margin-bottom: 25px;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: 4rem;
+      line-height: 1.1;
+      margin-bottom: 25px;
+    }
+
+    h1 span {
+      color: #22d3ee;
+    }
+
+    .hero-text p {
+      color: #cbd5e1;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      max-width: 650px;
+      margin-bottom: 35px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 18px;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #06b6d4, #2563eb);
+      color: white;
+      box-shadow: 0 0 25px rgba(6,182,212,0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-4px);
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+    .profile-card {
+      width: 350px;
+      height: 350px;
+      border-radius: 40px;
+      background: linear-gradient(135deg, #06b6d4, #2563eb, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 0 50px rgba(6,182,212,0.35);
+      animation: floating 4s ease-in-out infinite;
+    }
+
+    .profile-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    @keyframes floating {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-15px); }
+      100% { transform: translateY(0px); }
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .section-title {
+      font-size: 2.8rem;
+      margin-bottom: 50px;
+      color: #22d3ee;
+    }
+
+    .glass {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(12px);
+      border-radius: 30px;
+      padding: 40px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    }
+
+    .about p {
+      color: #cbd5e1;
+      line-height: 1.9;
+      font-size: 1.05rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .skill-card {
+      text-align: center;
+      padding: 30px 20px;
+      transition: 0.3s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-8px);
+      border-color: #22d3ee;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .project-card {
+      transition: 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 30px;
+      padding: 25px;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px);
+      border-color: #22d3ee;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .project-image {
+      height: 220px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #06b6d4, #2563eb, #4f46e5);
+      margin-bottom: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-card h3 {
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+
+    .project-card p {
+      color: #cbd5e1;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .tech {
+      background: rgba(34,211,238,0.15);
+      color: #67e8f9;
+      padding: 8px 15px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 20px;
+    }
+
+    .contact-message {
+      display: none;
+      margin-top: 0;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(34,211,238,0.15);
+      border: 1px solid rgba(34,211,238,0.35);
+      color: #d9f7ff;
+      font-size: 0.95rem;
+    }
+
+    .contact-warning {
+      display: none;
+      margin-top: 0;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(250,204,21,0.15);
+      border: 1px solid rgba(250,204,21,0.35);
+      color: #f8e47a;
+      font-size: 0.95rem;
+    }
+
+    .contact-message.show,
+    .contact-warning.show {
+      display: block;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.05);
+      color: white;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 180px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: #22d3ee;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 0;
+      color: #94a3b8;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2.8rem;
+      }
+
+      .profile-card {
+        width: 280px;
+        height: 280px;
+        font-size: 4rem;
+      }
+
+      .section-title {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <header>
+      <div class="hero-text">
+        <div class="tag">Python Developer Portfolio</div>
+
+        <h1>
+          Hola, soy <span>Yesenia Castillo</span>
+        </h1>
+
+        <p>
+          Desarrolladora Python Junior apasionada por crear soluciones digitales,
+          automatización de procesos y aplicaciones web modernas mientras sigo
+          creciendo profesionalmente en el mundo del desarrollo.
+        </p>
+
+        <div class="buttons">
+          <a href="https://github.com" class="btn btn-primary">GitHub</a>
+          <a href="https://linkedin.com" class="btn btn-secondary">LinkedIn</a>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <div class="profile-card">
+          <img src="project-image/Nefertari_Junior.png" alt="Nefertari Junior" />
+        </div>
+      </div>
+    </header>
+
+    <section class="about">
+      <h2 class="section-title">Sobre mí</h2>
+
+      <div class="glass">
+        <p>
+          Actualmente estoy desarrollando mis habilidades como programadora Python Junior.
+          Me apasiona crear proyectos útiles, aprender nuevas tecnologías y mejorar constantemente.
+          Disfruto trabajar en automatización, APIs, backend y aplicaciones web modernas.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Habilidades</h2>
+
+      <div class="skills-grid">
+        <div class="glass skill-card">Python</div>
+        <div class="glass skill-card">PHP</div>
+        <div class="glass skill-card">Git & GitHub</div>
+        <div class="glass skill-card">HTML/CSS</div>
+        <div class="glass skill-card">MySQL</div>
+        <div class="glass skill-card">SQLite</div>
+       
+        
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Proyectos</h2>
+
+      <div class="projects-grid">
+
+        <div class="glass project-card">
+          <div class="project-image">
+            <img src="project-image/Cosmetic_app.png" alt="Cosmetic app" />
+          </div>
+
+          <h3>App Control de inventario de cosmética</h3>
+
+          <p>
+            Sistema de inventario para productos de cosmética, creado con Python, SQLite y Tkinter.
+          </p>
+
+          <div class="tech-stack">
+            <span class="tech">Python</span>
+            <span class="tech">SQLite</span>
+            <span class="tech">Tkinter</span>
+          </div>
+
+          <a href="project-image/Cosmetic_app.png" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Ver Proyecto</a>
+        </div>
+
+        <div class="glass project-card">
+          <div class="project-image">
+            <img src="project-image/portalvirtual.png" alt="Portal virtual" />
+          </div>
+
+          <h3>Portal virtual</h3>
+
+          <p>
+            Portal virtual de biblioteca escolar desarrollado con PHP, MySQL y CSS.
+          </p>
+
+          <div class="tech-stack">
+            <span class="tech">PHP</span>
+            <span class="tech">MySQL</span>
+            <span class="tech">CSS</span>
+          </div>
+
+          <a href="project-image/portalvirtual.png" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Ver Proyecto</a>
+        </div>
+
+      
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Contacto</h2>
+
+      <div class="glass">
+        <form class="contact-form" action="https://formsubmit.co/ycgaray@gmail.com" method="POST" target="_blank">
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde portafolio">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="Nombre" placeholder="Tu nombre" required>
+          <input type="email" name="Correo" placeholder="Tu correo" required>
+          <textarea name="Mensaje" placeholder="Escribe tu mensaje" required></textarea>
+
+          <button class="btn btn-primary" type="submit">
+            Enviar mensaje
+          </button>
+          <div id="contact-message" class="contact-message">¡Gracias! Tu mensaje se envió correctamente.</div>
+          <div id="contact-warning" class="contact-warning">Estás abriendo el archivo localmente. Si no usas servidor web, el formulario usará el cliente de correo instalado.</div>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 - Portafolio Python Junior</p>
+    </footer>
+
+  </div>
+
+  <script>
+    const contactForm = document.querySelector('.contact-form');
+    const contactMessage = document.getElementById('contact-message');
+    const contactWarning = document.getElementById('contact-warning');
+    const isLocalFile = window.location.protocol === 'file:';
+
+    if (isLocalFile && contactWarning) {
+      contactWarning.classList.add('show');
+    }
+
+    if (contactForm && contactMessage) {
+      contactForm.addEventListener('submit', (event) => {
+        if (isLocalFile) {
+          event.preventDefault();
+          const name = contactForm.querySelector('[name="Nombre"]').value.trim();
+          const email = contactForm.querySelector('[name="Correo"]').value.trim();
+          const message = contactForm.querySelector('[name="Mensaje"]').value.trim();
+          const subject = 'Nuevo mensaje desde portafolio';
+          const body = `Nombre: ${name}\nCorreo: ${email}\nMensaje:\n${message}`;
+          const mailto = `mailto:ycgaray@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          contactMessage.textContent = 'Abriendo tu cliente de correo para enviar el mensaje...';
+          contactMessage.classList.add('show');
+          window.location.href = mailto;
+          return;
+        }
+
+        contactMessage.classList.add('show');
+      });
+    }
+  </script>
+</body>
+</html>
