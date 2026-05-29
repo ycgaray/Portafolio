@@ -523,7 +523,7 @@
           const message = contactForm.querySelector('[name="message"]').value.trim();
           const subject = 'Nuevo mensaje desde portafolio';
           const body = `Nombre: ${name}\nCorreo: ${email}\nMensaje:\n${message}`;
-          const mailto = `mailto:ycgaray@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          const mailto = `mailto:JC_juniorPython@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
           contactMessage.textContent = 'Abriendo tu cliente de correo para enviar el mensaje...';
           contactMessage.classList.add('show');
           window.location.href = mailto;
