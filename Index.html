@@ -385,7 +385,7 @@
         <p>
           Actualmente estoy desarrollando mis habilidades como programadora Python Junior.
           Me apasiona crear proyectos útiles, aprender nuevas tecnologías y mejorar constantemente.
-          Disfruto trabajar en Python, PHP y HTML.
+          Disfruto trabajar en automatización, APIs, backend y aplicaciones web modernas.
         </p>
       </div>
     </section>
@@ -400,8 +400,6 @@
         <div class="glass skill-card">HTML/CSS</div>
         <div class="glass skill-card">MySQL</div>
         <div class="glass skill-card">SQLite</div>
-       
-        
       </div>
     </section>
 
@@ -450,7 +448,6 @@
           <a href="project-image/portalvirtual.png" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Ver Proyecto</a>
         </div>
 
-      
       </div>
     </section>
 
@@ -458,12 +455,12 @@
       <h2 class="section-title">Contacto</h2>
 
       <div class="glass">
-        <form class="contact-form" action="https://formsubmit.co/ycgaray@gmail.com" method="POST" target="_blank">
+        <form class="contact-form" action="https://formsubmit.co/ycgaray@gmail.com" method="POST">
           <input type="hidden" name="_subject" value="Nuevo mensaje desde portafolio">
           <input type="hidden" name="_captcha" value="false">
-          <input type="text" name="Nombre" placeholder="Tu nombre" required>
-          <input type="email" name="Correo" placeholder="Tu correo" required>
-          <textarea name="Mensaje" placeholder="Escribe tu mensaje" required></textarea>
+          <input type="text" name="name" placeholder="Tu nombre" required>
+          <input type="email" name="email" placeholder="Tu correo" required>
+          <textarea name="message" placeholder="Escribe tu mensaje" required></textarea>
 
           <button class="btn btn-primary" type="submit">
             Enviar mensaje
@@ -494,9 +491,9 @@
       contactForm.addEventListener('submit', (event) => {
         if (isLocalFile) {
           event.preventDefault();
-          const name = contactForm.querySelector('[name="Nombre"]').value.trim();
-          const email = contactForm.querySelector('[name="Correo"]').value.trim();
-          const message = contactForm.querySelector('[name="Mensaje"]').value.trim();
+          const name = contactForm.querySelector('[name="name"]').value.trim();
+          const email = contactForm.querySelector('[name="email"]').value.trim();
+          const message = contactForm.querySelector('[name="message"]').value.trim();
           const subject = 'Nuevo mensaje desde portafolio';
           const body = `Nombre: ${name}\nCorreo: ${email}\nMensaje:\n${message}`;
           const mailto = `mailto:ycgaray@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -505,11 +502,6 @@
           window.location.href = mailto;
           return;
         }
-        <form action="https://formsubmit.co/ycgaray@gmail.com" method="POST">
-     <input type="text" name="name" required>
-     <input type="email" name="email" required>
-     <button type="submit">Send</button>
-</form> 
         contactMessage.classList.add('show');
       });
     }
