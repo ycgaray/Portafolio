@@ -107,6 +107,9 @@
       border-radius: 18px;
       font-weight: 600;
       transition: 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
     }
 
     .btn-primary {
@@ -285,6 +288,21 @@
       font-size: 0.95rem;
     }
 
+    .contact-success {
+      display: none;
+      margin-top: 0;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: rgba(34,211,238,0.15);
+      border: 1px solid rgba(34,211,238,0.35);
+      color: #d9f7ff;
+      font-size: 0.95rem;
+    }
+
+    .contact-success.show {
+      display: block;
+    }
+
     .contact-warning {
       display: none;
       margin-top: 0;
@@ -455,9 +473,7 @@
       <h2 class="section-title">Contacto</h2>
 
       <div class="glass">
-        <form class="contact-form" action="https://formsubmit.co/ycgaray@gmail.com" method="POST">
-          <input type="hidden" name="_subject" value="Nuevo mensaje desde portafolio">
-          <input type="hidden" name="_captcha" value="false">
+        <form class="contact-form" id="contact-form">
           <input type="text" name="name" placeholder="Tu nombre" required>
           <input type="email" name="email" placeholder="Tu correo" required>
           <textarea name="message" placeholder="Escribe tu mensaje" required></textarea>
@@ -465,7 +481,8 @@
           <button class="btn btn-primary" type="submit">
             Enviar mensaje
           </button>
-          <div id="contact-message" class="contact-message">¡Gracias! Tu mensaje se envió correctamente.</div>
+          <div id="contact-success" class="contact-success">✅ ¡Gracias! Tu mensaje se envió correctamente. Pronto nos pondremos en contacto.</div>
+          <div id="contact-message" class="contact-message" style="display:none;"></div>
           <div id="contact-warning" class="contact-warning">Estás abriendo el archivo localmente. Si no usas servidor web, el formulario usará el cliente de correo instalado.</div>
         </form>
       </div>
@@ -478,7 +495,8 @@
   </div>
 
   <script>
-    const contactForm = document.querySelector('.contact-form');
+    const contactForm = document.getElementById('contact-form');
+    const contactSuccess = document.getElementById('contact-success');
     const contactMessage = document.getElementById('contact-message');
     const contactWarning = document.getElementById('contact-warning');
     const isLocalFile = window.location.protocol === 'file:';
@@ -487,10 +505,11 @@
       contactWarning.classList.add('show');
     }
 
-    if (contactForm && contactMessage) {
-      contactForm.addEventListener('submit', (event) => {
+    if (contactForm) {
+      contactForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
         if (isLocalFile) {
-          event.preventDefault();
           const name = contactForm.querySelector('[name="name"]').value.trim();
           const email = contactForm.querySelector('[name="email"]').value.trim();
           const message = contactForm.querySelector('[name="message"]').value.trim();
@@ -502,7 +521,30 @@
           window.location.href = mailto;
           return;
         }
-        contactMessage.classList.add('show');
+
+        // Enviar a Formspree
+        const formData = new FormData(contactForm);
+        
+        try {
+          const response = await fetch('https://formspree.io/f/mzzzlldv', {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+
+          if (response.ok) {
+            contactSuccess.classList.add('show');
+            contactForm.reset();
+          } else {
+            contactMessage.textContent = 'Error al enviar el mensaje. Por favor, intenta de nuevo.';
+            contactMessage.classList.add('show');
+          }
+        } catch (error) {
+          contactMessage.textContent = 'Error de conexión. Por favor, intenta de nuevo.';
+          contactMessage.classList.add('show');
+        }
       });
     }
   </script>
