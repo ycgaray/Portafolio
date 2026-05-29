@@ -477,20 +477,21 @@
       </div>
     </section>
 
-    <section>
+   <section>
       <h2 class="section-title">Contacto</h2>
 
       <div class="glass">
-        <form class="contact-form" id="contact-form">
-          <input type="text" name="name" placeholder="Tu nombre" required>
-          <input type="email" name="email" placeholder="Tu correo" required>
-          <textarea name="message" placeholder="Escribe tu mensaje" required></textarea>
+        <form class="contact-form" action="https://formsubmit.co/ycgaray@gmail.com" method="POST" target="_blank">
+          <input type="hidden" name="_subject" value="Nuevo mensaje desde portafolio">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="Nombre" placeholder="Tu nombre" required>
+          <input type="email" name="Correo" placeholder="Tu correo" required>
+          <textarea name="Mensaje" placeholder="Escribe tu mensaje" required></textarea>
 
           <button class="btn btn-primary" type="submit">
             Enviar mensaje
           </button>
-          <div id="contact-success" class="contact-success">✅ ¡Gracias! Tu mensaje se envió correctamente. Pronto nos pondremos en contacto.</div>
-          <div id="contact-message" class="contact-message" style="display:none;"></div>
+          <div id="contact-message" class="contact-message">¡Gracias! Tu mensaje se envió correctamente.</div>
           <div id="contact-warning" class="contact-warning">Estás abriendo el archivo localmente. Si no usas servidor web, el formulario usará el cliente de correo instalado.</div>
         </form>
       </div>
@@ -503,8 +504,7 @@
   </div>
 
   <script>
-    const contactForm = document.getElementById('contact-form');
-    const contactSuccess = document.getElementById('contact-success');
+    const contactForm = document.querySelector('.contact-form');
     const contactMessage = document.getElementById('contact-message');
     const contactWarning = document.getElementById('contact-warning');
     const isLocalFile = window.location.protocol === 'file:';
@@ -513,14 +513,13 @@
       contactWarning.classList.add('show');
     }
 
-    if (contactForm) {
-      contactForm.addEventListener('submit', async (event) => {
-        event.preventDefault();
-
+    if (contactForm && contactMessage) {
+      contactForm.addEventListener('submit', (event) => {
         if (isLocalFile) {
-          const name = contactForm.querySelector('[name="name"]').value.trim();
-          const email = contactForm.querySelector('[name="email"]').value.trim();
-          const message = contactForm.querySelector('[name="message"]').value.trim();
+          event.preventDefault();
+          const name = contactForm.querySelector('[name="Nombre"]').value.trim();
+          const email = contactForm.querySelector('[name="Correo"]').value.trim();
+          const message = contactForm.querySelector('[name="Mensaje"]').value.trim();
           const subject = 'Nuevo mensaje desde portafolio';
           const body = `Nombre: ${name}\nCorreo: ${email}\nMensaje:\n${message}`;
           const mailto = `mailto:JC_juniorPython@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -529,8 +528,10 @@
           window.location.href = mailto;
           return;
         }
-          contactMessage.classList.add('show');
+
+        contactMessage.classList.add('show');
       });
+    }
   </script>
 </body>
 </html>
