@@ -462,7 +462,7 @@
       </div>
     </section>
 
-    <section>
+   <section>
       <h2 class="section-title">Contacto</h2>
 
       <div class="glass">
@@ -507,13 +507,14 @@
           const message = contactForm.querySelector('[name="Mensaje"]').value.trim();
           const subject = 'Nuevo mensaje desde portafolio';
           const body = `Nombre: ${name}\nCorreo: ${email}\nMensaje:\n${message}`;
-          const mailto = `mailto:JC_juniorPython?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          const mailto = `mailto:JC_juniorPython@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
           contactMessage.textContent = 'Abriendo tu cliente de correo para enviar el mensaje...';
           contactMessage.classList.add('show');
           window.location.href = mailto;
           return;
         }
-          contactMessage.classList.add('show');
+
+        contactMessage.classList.add('show');
       });
     }
   </script>
