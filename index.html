@@ -475,36 +475,5 @@
     </footer>
 
   </div>
-
-  <script>
-    const contactForm = document.querySelector('.contact-form');
-    const contactMessage = document.getElementById('contact-message');
-    const contactWarning = document.getElementById('contact-warning');
-    const isLocalFile = window.location.protocol === 'file:';
-
-    if (isLocalFile && contactWarning) {
-      contactWarning.classList.add('show');
-    }
-
-    if (contactForm && contactMessage) {
-      contactForm.addEventListener('submit', (event) => {
-        if (isLocalFile) {
-          event.preventDefault();
-          const name = contactForm.querySelector('[name="Nombre"]').value.trim();
-          const email = contactForm.querySelector('[name="Correo"]').value.trim();
-          const message = contactForm.querySelector('[name="Mensaje"]').value.trim();
-          const subject = 'Nuevo mensaje desde portafolio';
-          const body = `Nombre: ${name}\nCorreo: ${email}\nMensaje:\n${message}`;
-          const mailto = `mailto:JC_juniorPython@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-          contactMessage.textContent = 'Abriendo tu cliente de correo para enviar el mensaje...';
-          contactMessage.classList.add('show');
-          window.location.href = mailto;
-          return;
-        }
-
-        contactMessage.classList.add('show');
-      });
-    }
-  </script>
 </body>
 </html>
