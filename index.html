@@ -300,14 +300,7 @@
     .contact-warning.show {
       display: block;
     }
-formulario {
-      width: min(92%, 460px);
-      padding: 28px;
-      background: #ffffff;
-      border: 1px solid #d6dee8;
-      border-radius: 8px;
-      box-shadow: 0 12px 32px rgba(28, 45, 70, 0.12);
-    }
+
     input,
     textarea {
       width: 100%;
@@ -470,8 +463,11 @@ formulario {
     </section>
 
    <section>
-       <form class="formulario" id="formularioEnvio">
-    <h1>Envio web</h1>
+
+      <h2 class="section-title">Contacto</h2>
+
+      <form class="formulario" action="mailto:JC_juniorPython@gmail.com" method="post" enctype="text/plain">
+    <h1>Formulario de envio</h1>
 
     <label for="nombre">Nombre</label>
     <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre" required>
@@ -482,51 +478,45 @@ formulario {
     <label for="descripcion">Descripcion</label>
     <textarea id="descripcion" name="descripcion" placeholder="Escribe tu descripcion" required></textarea>
 
-    <button type="submit" id="botonEnviar"target="_blank" rel="noopener noreferrer" class="btn btn-primary">Enviar</button>
-    <p class="mensaje" id="mensaje"></p>
-         
+    <button type="submit">Enviar</button>
   </form>
+    </section>
+
+    <footer>
+      <p>© 2026 - Portafolio Python Junior</p>
+    </footer>
+
+  </div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbw66gc2LVPnA_xRFAKzr0KAbUCVo9q24aimtsh9Zg1FTi2P9_rVspvjfr418_2vi6Kk/exec";
-    const formulario = document.getElementById("formularioEnvio");
-    const botonEnviar = document.getElementById("botonEnviar");
-    const mensaje = document.getElementById("mensaje");
+    const contactForm = document.querySelector('.contact-form');
+    const contactMessage = document.getElementById('contact-message');
+    const contactWarning = document.getElementById('contact-warning');
+    const isLocalFile = window.location.protocol === 'file:';
 
-    formulario.addEventListener("submit", async function (evento) {
-      evento.preventDefault();
+    if (isLocalFile && contactWarning) {
+      contactWarning.classList.add('show');
+    }
 
-      if (scriptURL === "https://script.google.com/macros/s/AKfycbw66gc2LVPnA_xRFAKzr0KAbUCVo9q24aimtsh9Zg1FTi2P9_rVspvjfr418_2vi6Kk/exec") {
-        mensaje.textContent = "Primero pega la URL de Google Apps Script.";
-        mensaje.className = "mensaje error";
-        return;
-      }
+    if (contactForm && contactMessage) {
+      contactForm.addEventListener('submit', (event) => {
+        if (isLocalFile) {
+          event.preventDefault();
+          const name = contactForm.querySelector('[name="Nombre"]').value.trim();
+          const email = contactForm.querySelector('[name="Correo"]').value.trim();
+          const message = contactForm.querySelector('[name="Mensaje"]').value.trim();
+          const subject = 'Nuevo mensaje desde portafolio';
+          const body = `Nombre: ${name}\nCorreo: ${email}\nMensaje:\n${message}`;
+          const mailto = `mailto:ycgaray@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          contactMessage.textContent = 'Abriendo tu cliente de correo para enviar el mensaje...';
+          contactMessage.classList.add('show');
+          window.location.href = mailto;
+          return;
+        }
 
-      botonEnviar.disabled = true;
-      botonEnviar.textContent = "Enviando...";
-      mensaje.textContent = "";
-      mensaje.className = "mensaje";
-
-      const datos = new FormData(formulario);
-
-      try {
-        await fetch(scriptURL, {
-          method: "POST",
-          mode: "no-cors",
-          body: datos
-        });
-
-        formulario.reset();
-        mensaje.textContent = "Mensaje enviado correctamente.";
-        mensaje.className = "mensaje ok";
-      } catch (error) {
-        mensaje.textContent = "No se pudo enviar el mensaje. Revisa la URL del servicio.";
-        mensaje.className = "mensaje error";
-      } finally {
-        botonEnviar.disabled = false;
-        botonEnviar.textContent = "Enviar";
-      }
-    });
+        contactMessage.classList.add('show');
+      });
+    }
   </script>
 </body>
 </html>
